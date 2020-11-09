@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>CovidAnalysis</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Covid Analysis</h1>
+            <p class="lead">Statistic about Covid in CZ</p>
+            <hr class="my-4">
+            <p>Only for March 2020</p>
+        </div>
+        <form method="get" action="#">
+            <div class="form-group">
+                <label for="kraj">Vyber kraj</label>
+                <select n:inner-foreach="$krajList as $item" id="kraj" class="custom-select" name="kraj">
+                    <option value="{$item[0]}">{$item[1]}</option>
+                </select>
+            </div>
+            <input class="form-control" type="submit" value="Zobraz" >
+        </form>
+        <h2 class="mt-5 mb-3">Analýza pro {$resultCovidInKraj[5]}</h2>
+
+        <div class="d-flex flex-row">
+            <h3 class="col">Celkový počet nakažených: {$resultCovidInKraj[0]}</h3>
+            <h3 class="col">Průměrný věk: {$resultCovidInKraj[3]|number:1}</h3>
+        </div>
+        <div class="d-flex flex-row">
+            <h3 class="col">Celkový počet nakažených mužů: {$resultCovidInKraj[1]}</h3>
+            <h3 class="col">Celkový počet nakažených žen: {$resultCovidInKraj[2]}</h3>
+        </div>
+        <div class="d-flex flex-row">
+            <h3 class="col">Celkový počet nakažených v cizině: {$resultCovidInKraj[4]}</h3>
+            <h3 class="col">Celkový počet nakažených v ČR: {$resultCovidInKraj[0]-$resultCovidInKraj[4]}</h3>
+        </div>
+
+        <h3 class="mt-5 mb-3">Počet nakažených dle země nákazy</h3>
+
+        <table class="table table-light">
+                <tr n:foreach="$resultImpactForeign as $item">
+                    <td>{$item[0]}</td>
+                    <td>{$item[1]}</td>
+                </tr>
+        </table>
+    </div>
+    
+</body>
+
+</html>
